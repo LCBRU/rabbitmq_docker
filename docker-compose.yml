@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  rabbitmq:
+    restart: always
+    image: "rabbitmq:3-management"
+    hostname: "${HOSTNAME}"
+    environment:
+      RABBITMQ_ERLANG_COOKIE: "${RABBITMQ_ERLANG_COOKIE}"
+      RABBITMQ_DEFAULT_USER: "${RABBITMQ_DEFAULT_USER}"
+      RABBITMQ_DEFAULT_PASS: "${RABBITMQ_DEFAULT_PASS}"
+      RABBITMQ_DEFAULT_VHOST: "${RABBITMQ_DEFAULT_VHOST}"
+    ports:
+      - "${MANAGEMENT_PORT}:15672"
+      - "${QUEUE_PORT}:5672"
+    labels:
+      NAME: "${NAME}"
+    volumes:
+      - "${DATA_DIRECTORY}:/var/lib/rabbitmq/mnesia"
